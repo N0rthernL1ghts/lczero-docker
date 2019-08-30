@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+cd "${SCRIPTPATH}"
+
+./lc0 --config=lc0.config
