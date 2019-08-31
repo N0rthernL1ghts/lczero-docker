@@ -25,7 +25,8 @@ RUN apt update \
     && pip3 install meson \
     && git clone -b "release/${LCZERO_VERSION}" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
     && cd  lczero \
-    && ./build.sh
+    && ./build.sh \
+    && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 
 # LCZero Service
 FROM nlss/xinetd:latest AS lczero-service
