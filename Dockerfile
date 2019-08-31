@@ -39,3 +39,5 @@ RUN apt update \
 
 ADD rootfs /
 COPY --from=lczero-build /tmp/lczero/build/release /lczero/bin
+
+VOLUME ["/lczero/resources"]
