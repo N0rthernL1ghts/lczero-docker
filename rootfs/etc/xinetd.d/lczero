@@ -5,7 +5,7 @@ service lczero
   server_args = --config=/lczero/bin/lc0.config
   socket_type = stream
   protocol = tcp
-  user = root
+  user = lczero
   wait = no
   port = 3333
   # only_from = localhost

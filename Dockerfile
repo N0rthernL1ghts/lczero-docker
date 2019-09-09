@@ -34,6 +34,7 @@ FROM nlss/xinetd:latest AS lczero-service
 RUN apt update \
     && DEBIAN_FRONTEND=noninteractive \
        apt install libprotobuf-dev libopenblas-dev --yes --no-install-recommends \
+    && adduser --shell /bin/false --disabled-password --gecos "LCZero User" --home "/lczero" "lczero" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && echo "lczero          3333/tcp                        # LCZero" >> "/etc/services"
