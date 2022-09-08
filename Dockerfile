@@ -25,7 +25,7 @@ RUN set -eux \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
     && pip3 install meson \
-    && git clone -b "release/${LCZERO_VERSION}" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
+    && git clone -b "release/${LCZERO_VERSION}" --jobs="$(nproc)" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
     && cd  lczero \
     && ./build.sh \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
