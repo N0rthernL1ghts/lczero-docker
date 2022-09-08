@@ -34,6 +34,7 @@ jobs:
         with:
           context: .
           push: true
+          pull: true
           tags: nlss/lczero:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
