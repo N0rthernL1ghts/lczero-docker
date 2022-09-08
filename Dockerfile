@@ -2,7 +2,7 @@
 FROM debian:stable-slim AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
-ARG LCZERO_VERSION=0.22
+ARG LCZERO_VERSION=0.28
 
 WORKDIR /tmp
 
