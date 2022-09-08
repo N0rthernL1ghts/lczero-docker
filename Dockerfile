@@ -46,3 +46,5 @@ ADD rootfs /
 COPY --from=lczero-build /tmp/lczero/build/release /lczero/bin
 
 VOLUME ["/lczero/resources"]
+
+EXPOSE 3333/TCP
