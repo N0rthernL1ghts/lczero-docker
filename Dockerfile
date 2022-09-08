@@ -5,9 +5,11 @@ ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION=0.22
 
 WORKDIR /tmp
-RUN apt update \
-    && DEBIAN_FRONTEND=noninteractive \
-       apt install --yes  --no-install-recommends \
+
+RUN set -eux \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install --yes  --no-install-recommends \
             build-essential \
             git \
             libopenblas-dev \
@@ -29,11 +31,12 @@ RUN apt update \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 
 # LCZero Service
-FROM nlss/xinetd:latest AS lczero-service
+FROM nlss/xinetd:debian AS lczero-service
 
-RUN apt update \
-    && DEBIAN_FRONTEND=noninteractive \
-       apt install libprotobuf-dev libopenblas-dev --yes --no-install-recommends \
+RUN set -eux \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install libprotobuf-dev libopenblas-dev --yes --no-install-recommends \
     && adduser --shell /bin/false --disabled-password --gecos "LCZero User" --home "/lczero" "lczero" \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/ \
