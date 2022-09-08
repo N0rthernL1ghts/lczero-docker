@@ -30,6 +30,16 @@ RUN set -eux \
     && ./build.sh \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 
+
+
+# Root filesystem builder
+FROM scratch AS rootfs
+
+COPY ["./rootfs", "/"]
+COPY --from=lczero-build ["/tmp/lczero/build/release", "/lczero/bin/"]
+
+
+
 # LCZero Service
 FROM nlss/xinetd:debian AS lczero-service
 
@@ -42,8 +52,7 @@ RUN set -eux \
     && rm -rf /var/lib/apt/lists/ \
     && echo "lczero          3333/tcp                        # LCZero" >> "/etc/services"
 
-ADD rootfs /
-COPY --from=lczero-build /tmp/lczero/build/release /lczero/bin
+COPY --from=rootfs ["/", "/"]
 
 VOLUME ["/lczero/resources"]
 
