@@ -1,4 +1,10 @@
 #!/usr/bin/env sh
 
+while [ ! -f "/var/log/lczero/lczero.log" ]
+do
+  echo "> LCZero log not found. Server might not be started yet.  Waiting for log..."
+  sleep 10
+done
+
 echo "> LCZero Log Monitor service started"
 exec tail -F /var/log/lczero/lczero.log
