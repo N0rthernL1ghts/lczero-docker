@@ -54,6 +54,4 @@ RUN set -eux \
 
 COPY --from=rootfs ["/", "/"]
 
-VOLUME ["/lczero/resources"]
-
 EXPOSE 3333/TCP
