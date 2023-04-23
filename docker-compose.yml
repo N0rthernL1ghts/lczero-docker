@@ -8,6 +8,7 @@ services:
     volumes:
       - "./data/networks:/lczero/resources/networks"
       - "./data/lc0.config:/lczero/resources/lc0.config"
+      - "./data/logs:/lczero/logs"
     networks:
       default:
     deploy:
