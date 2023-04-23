@@ -1,7 +1,6 @@
 group "default" {
   targets = [
     "0_28_0",
-    "0_28_2",
     "0_29_0"
   ]
 }
@@ -83,16 +82,8 @@ target "0_28_0" {
   inherits   = ["build-dockerfile", "build-platforms", "build-common"]
   cache-from = get-cache-from("0.28.0")
   cache-to   = get-cache-to("0.28.0")
-  tags       = get-tags("0.28.0", [])
+  tags       = get-tags("0.28.0", ["0.28"])
   args       = get-args("0.28.0")
-}
-
-target "0_28_2" {
-  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
-  cache-from = get-cache-from("0.28.2")
-  cache-to   = get-cache-to("0.28.2")
-  tags       = get-tags("0.28.2", ["0.28"])
-  args       = get-args("0.28.2")
 }
 
 target "0_29_0" {
