@@ -83,7 +83,7 @@ target "0_28_0" {
   cache-from = get-cache-from("0.28.0")
   cache-to   = get-cache-to("0.28.0")
   tags       = get-tags("0.28.0", ["0.28"])
-  args       = get-args("0.28.0")
+  args       = get-args("0.28")
 }
 
 target "0_29_0" {
@@ -91,5 +91,5 @@ target "0_29_0" {
   cache-from = get-cache-from("0.29.0")
   cache-to   = get-cache-to("0.29.0")
   tags       = get-tags("0.29.0", ["0.29", "latest"])
-  args       = get-args("0.29.0")
+  args       = get-args("0.29")
 }
