@@ -54,4 +54,11 @@ RUN set -eux \
 
 COPY --from=rootfs ["/", "/"]
 
+ARG LCZERO_VERSION
+LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
+      org.opencontainers.image.source="https://github.com/N0rthernL1ghts/lczero-docker" \
+      org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Build ${TARGETPLATFORM}" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.version="${LCZERO_VERSION}"
+
 EXPOSE 3333/TCP
