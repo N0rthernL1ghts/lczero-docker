@@ -6,6 +6,8 @@ ARG LCZERO_VERSION=0.28
 
 WORKDIR /tmp
 
+COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
+
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
@@ -27,6 +29,7 @@ RUN set -eux \
     && pip3 install meson \
     && git clone -b "release/${LCZERO_VERSION}" --jobs="$(nproc)" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
     && cd  lczero \
+    && patch --verbose "meson.build" <"/tmp/meson.build.patch" \
     && ./build.sh \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 

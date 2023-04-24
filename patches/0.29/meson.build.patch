@@ -1,0 +1,14 @@
+--- meson.build	2023-04-24 20:02:00.288127578 +0200
++++ meson-mod.build	2023-04-24 20:02:26.425601176 +0200
+@@ -36,11 +36,6 @@
+   # Thread safety annotation
+   add_project_arguments('-Wthread-safety', language : 'cpp')
+ endif
+-if cc.get_id() == 'clang' or cc.get_id() == 'gcc'
+-  if get_option('buildtype') == 'release'
+-    add_project_arguments(cc.get_supported_arguments(['-march=native']), language : 'cpp')
+-  endif
+-endif
+ if cc.get_id() == 'msvc'
+   # Silence some zlib warnings.
+   add_global_arguments('/wd4131', '/wd4267', '/wd4127', '/wd4244', '/wd4245', language : 'c')
