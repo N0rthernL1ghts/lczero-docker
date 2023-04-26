@@ -4,7 +4,7 @@ downloadNetwork() {
     NETWORK_SHA="${1:?Missing network SHA}"
     curl --location \
          --request GET \
-         --url "https://training.lczero.org/get_network\?sha\=${NETWORK_SHA}"\
+         --url "https://training.lczero.org/get_network?sha=${NETWORK_SHA}"\
          --output "/lczero/resources/networks/${NETWORK_SHA}"
     return $?
 }
