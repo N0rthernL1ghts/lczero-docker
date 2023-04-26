@@ -40,6 +40,7 @@ FROM scratch AS rootfs
 
 COPY ["./rootfs", "/"]
 COPY --from=lczero-build ["/tmp/lczero/build/release", "/lczero/bin/"]
+COPY --from=hairyhenderson/gomplate:v3.11.5-alpine ["/bin/gomplate", "/usr/local/bin/"]
 
 
 

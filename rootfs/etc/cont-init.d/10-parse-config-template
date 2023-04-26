@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+main() {
+    mkdir -p /lczero/resources
+
+    echo "> Rendering lc0 config"
+    /usr/local/bin/gomplate -V \
+        -o /lczero/resources/lc0.config \
+        -f /etc/templates/lc0.config.tmp
+    return $?
+}
+
+main "${@}"
+exit $?

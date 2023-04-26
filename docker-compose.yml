@@ -5,9 +5,15 @@ services:
     image: ghcr.io/n0rthernl1ghts/lc0:latest
     ports:
       - "3333:3333/tcp"
+    environment:
+      LCZERO_BACKEND: "multiplexing"
+      LCZERO_THREADS: 4
+      LCZERO_RAM_LIMIT_MB: 4096
+      LCZERO_PONDER: "true"
+      LCZERO_VERBOSE_MOVE_STATS: "true"
+      LCZERO_BACKEND_OPTS: "blas_cores=4"
     volumes:
       - "./data/networks:/lczero/resources/networks"
-      - "./data/lc0.config:/lczero/resources/lc0.config"
       - "./data/logs:/lczero/logs"
     networks:
       default:
