@@ -6,7 +6,7 @@ main() {
     echo "> Rendering lc0 config"
     /usr/local/bin/gomplate -V \
         -o /lczero/resources/lc0.config \
-        -f /etc/templates/lc0.config.tmp
+        -f /etc/templates/lc0.config.tpl
     return $?
 }
 
