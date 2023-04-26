@@ -25,10 +25,9 @@ main() {
         fi
 
         echo "> Creating network symlink"
-        ln -sf "/lczero/resources/networks/${NETWORK_SHA}" /lczero/resources/network
     fi
 
-
+    ln -sf "/lczero/resources/networks/${NETWORK_SHA}" /lczero/resources/network
     return $?
 }
 
