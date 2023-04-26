@@ -2,10 +2,12 @@
 
 downloadNetwork() {
     NETWORK_SHA="${1:?Missing network SHA}"
+    DL_TARGET="${2:?Missing download target}"
+
     curl --location \
          --request GET \
          --url "https://training.lczero.org/get_network?sha=${NETWORK_SHA}"\
-         --output "/lczero/resources/networks/${NETWORK_SHA}"
+         --output "${DL_TARGET}"
     return $?
 }
 
@@ -18,15 +20,20 @@ main() {
 
     # Download the network
     if [ ! -f "/lczero/resources/networks/${NETWORK_SHA}" ]; then
+        TEMP_FILE="$(mktemp)"
         echo "> Downloading network ${NETWORK_SHA}"
-        if ! downloadNetwork "${NETWORK_SHA}"; then
+        if ! downloadNetwork "${NETWORK_SHA}" "${TEMP_FILE}"; then
             echo "> Failed to download network ${NETWORK_SHA}"
             return 1
         fi
 
-        echo "> Creating network symlink"
+        echo "> Decompressing network"
+        zcat "${TEMP_FILE}" > "/lczero/resources/networks/${NETWORK_SHA}"
+
+        rm -f "${TEMP_FILE:?}"
     fi
 
+    echo "> Creating network symlink"
     ln -sf "/lczero/resources/networks/${NETWORK_SHA}" /lczero/resources/network
     return $?
 }
