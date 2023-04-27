@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+SCRIPT_PATH="$(
+    cd "$(dirname "$0")" || exit 1
+    pwd -P
+)"
 
-cd "${SCRIPTPATH}"
+cd "${SCRIPT_PATH}" || exit 1
 
-./lc0 --config=../resources/lc0.config
+main() {
+    echo "> Starting lc0 ${LCZERO_VERSION}"
+    echo "  Network: ${LCZERO_NETWORK_SHA}"
+
+    ./lc0 "${@}"
+    return $?
+}
+
+main "${@}"
+exit $?
