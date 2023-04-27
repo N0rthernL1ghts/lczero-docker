@@ -65,6 +65,7 @@ LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.version="${LCZERO_VERSION}"
 
+ENV LCZERO_VERSION="${LCZERO_VERSION}"
 ENV LCZERO_NETWORK_SHA="d7c810f15aad363d58e8efc8d54e7c743191177db27017a441d695acd472c3c5"
 
 EXPOSE 3333/TCP
