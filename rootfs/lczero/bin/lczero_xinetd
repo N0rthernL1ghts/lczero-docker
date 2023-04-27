@@ -10,7 +10,7 @@ main() {
     echo "> Starting lc0 ${LCZERO_VERSION}"
     echo "  Network: ${LCZERO_NETWORK_SHA}"
 
-    ./lc0 "${@}"
+    ./lc0 --config=/lczero/resources/lc0.config
     return $?
 }
 
