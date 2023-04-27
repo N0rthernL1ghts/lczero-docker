@@ -15,7 +15,6 @@ services:
       LCZERO_NETWORK_SHA: "d3afb47455f4318c397bbe257f4b149de497df6cf53dc142cf863bb4981cae05"
     volumes:
       - "./data/networks:/lczero/resources/networks"
-      - "./data/logs:/lczero/logs"
     networks:
       default:
     deploy:
