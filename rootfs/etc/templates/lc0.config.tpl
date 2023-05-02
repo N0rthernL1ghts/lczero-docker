@@ -10,6 +10,7 @@ ramlimit-mb={{ getenv "LCZERO_RAM_LIMIT_MB" "512" }}
 multipv={{ getenv "LCZERO_MULTIPV" "1" }}
 verbose-move-stats={{ getenv "LCZERO_VERBOSE_MOVE_STATS" "true" }}
 move-overhead={{ getenv "LCZERO_MOVE_OVERHEAD" "2000" }}
+slowmover={{ getenv "LCZERO_SLOWMOVER" "1.0" }}
 weights=/lczero/resources/network
 syzygy-paths=/lczero/resources/syzygy-tables
 logfile=/lczero/logs/lczero.log
