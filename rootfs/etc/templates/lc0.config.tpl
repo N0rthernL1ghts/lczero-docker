@@ -2,7 +2,8 @@
 ##################################################
 backend={{ getenv "LCZERO_BACKEND" "multiplexing" }}
 #backend-opts={{ getenv "LCZERO_BACKEND_OPTS" }}
-#threads={{ getenv "LCZERO_THREADS" "2" }}
+threads={{ getenv "LCZERO_THREADS" "2" }}
+nncache={{ getenv "LCZERO_NNCACHE" "200000" }}
 minibatch-size={{ getenv "LCZERO_MINIBATCH_SIZE" "256" }}
 max-prefetch={{ getenv "LCZERO_MAX_PREFETCH" "32" }}
 fpu-strategy={{ getenv "LCZERO_FPU_STRATEGY" "reduction" }}
