@@ -3,6 +3,7 @@
 backend={{ getenv "LCZERO_BACKEND" "multiplexing" }}
 #backend-opts={{ getenv "LCZERO_BACKEND_OPTS" }}
 #threads={{ getenv "LCZERO_THREADS" "2" }}
+minibatch-size={{ getenv "LCZERO_MINIBATCH_SIZE" "256" }}
 fpu-strategy={{ getenv "LCZERO_FPU_STRATEGY" "reduction" }}
 ramlimit-mb={{ getenv "LCZERO_RAM_LIMIT_MB" "512" }}
 multipv={{ getenv "LCZERO_MULTIPV" "1" }}
