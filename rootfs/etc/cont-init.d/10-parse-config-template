@@ -3,10 +3,16 @@
 main() {
     mkdir -p /lczero/resources
 
+    CONFIG_TEMPLATE="${LCZERO_CUSTOM_CONFIG_TEMPLATE:-/etc/templates/lc0.config.tpl}"
+
+    if [ -n "${LCZERO_CUSTOM_CONFIG_TEMPLATE}" ]; then
+        echo "> Custom config template specified"
+    fi
+
     echo "> Rendering lc0 config"
     /usr/local/bin/gomplate -V \
         -o /lczero/resources/lc0.config \
-        -f /etc/templates/lc0.config.tpl
+        -f "${CONFIG_TEMPLATE}"
     return $?
 }
 
