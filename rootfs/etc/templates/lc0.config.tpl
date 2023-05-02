@@ -1,3 +1,5 @@
+# See: https://lczero.org/dev/wiki/lc0-options/
+##################################################
 backend={{ getenv "LCZERO_BACKEND" "multiplexing" }}
 #backend-opts={{ getenv "LCZERO_BACKEND_OPTS" }}
 #threads={{ getenv "LCZERO_THREADS" "2" }}
