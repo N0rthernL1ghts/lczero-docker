@@ -43,6 +43,9 @@ minimum-kldgain-per-node={{ getenv "LCZERO_MINIMUM_KLDGAIN_PER_NODE" "0.00" }}
 # See: https://lczero.org/dev/wiki/lc0-options/#engine-options
 slowmover={{ getenv "LCZERO_SLOWMOVER" "1.0" }}
 move-overhead={{ getenv "LCZERO_MOVE_OVERHEAD" "2000" }}
+time-midpoint-move={{ getenv "LCZERO_TIME_MIDPOINT_MOVE" "51.50" }}
+time-steepness={{ getenv "LCZERO_TIME_STEEPNESS" "7.00" }}
+immediate-time-use={{ getenv "LCZERO_IMMEDIATE_TIME_USE" "1.00" }}
 ramlimit-mb={{ getenv "LCZERO_RAM_LIMIT_MB" "512" }}
 syzygy-paths=/lczero/resources/syzygy-tables
 logfile=/lczero/logs/lczero.log
