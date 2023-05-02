@@ -14,7 +14,23 @@ downloadNetwork() {
 main() {
     mkdir -p /lczero/resources
 
-    NETWORK_SHA="${LCZERO_NETWORK_SHA:?Missing network SHA}"
+    NETWORK_SHA="${LCZERO_NETWORK_SHA:-}"
+
+    if [ -z "${NETWORK_SHA}" ] || [ "${NETWORK_SHA}" = "custom" ]; then
+        echo "> No network specified, so none will be downloaded"
+        echo "  Looking for network in /lczero-custom/network"
+
+        if [ ! -f "/lczero-custom/network" ]; then
+            echo "> No network found"
+            echo "  Please mount a network to /lczero-custom/network"
+            return 0
+        fi
+
+        echo "> Found custom network. Creating symlink"
+        ln -sf "/lczero-custom/network" /lczero/resources/network
+        return $?
+
+    fi
 
     echo "> Downloading resources"
 
