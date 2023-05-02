@@ -25,7 +25,6 @@ temp-visit-offset={{ getenv "LCZERO_TEMP_VISIT_OFFSET" "0.00" }}
 verbose-move-stats={{ getenv "LCZERO_VERBOSE_MOVE_STATS" "true" }}
 smart-pruning-factor={{ getenv "LCZERO_SMART_PRUNING_FACTOR" "1.33" }}
 fpu-strategy={{ getenv "LCZERO_FPU_STRATEGY" "reduction" }}
-fpu-reduction={{ getenv "LCZERO_FPU_REDUCTION" "1.20" }}
 fpu-value={{ getenv "LCZERO_FPU_VALUE" "-1.00" }}
 cache-history-length={{ getenv "LCZERO_CACHE_HISTORY_LENGTH" "0" }}
 policy-softmax-temp={{ getenv "LCZERO_POLICY_SOFTMAX_TEMP" "2.20" }}
@@ -41,11 +40,7 @@ minimum-kldgain-per-node={{ getenv "LCZERO_MINIMUM_KLDGAIN_PER_NODE" "0.00" }}
 
 # Engine options
 # See: https://lczero.org/dev/wiki/lc0-options/#engine-options
-slowmover={{ getenv "LCZERO_SLOWMOVER" "1.0" }}
 move-overhead={{ getenv "LCZERO_MOVE_OVERHEAD" "2000" }}
-time-midpoint-move={{ getenv "LCZERO_TIME_MIDPOINT_MOVE" "51.50" }}
-time-steepness={{ getenv "LCZERO_TIME_STEEPNESS" "7.00" }}
-immediate-time-use={{ getenv "LCZERO_IMMEDIATE_TIME_USE" "1.00" }}
 ramlimit-mb={{ getenv "LCZERO_RAM_LIMIT_MB" "512" }}
 syzygy-paths=/lczero/resources/syzygy-tables
 logfile=/lczero/logs/lczero.log
