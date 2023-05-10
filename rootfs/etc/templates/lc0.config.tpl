@@ -148,3 +148,8 @@ logfile=/lczero/logs/lczero.log
 syzygy-paths={{ getenv "LCZERO_SYZYGY_PATHS" "/lczero/resources/syzygy-tables" }}
 {{"\n"}}
 {{- end -}}
+
+# Other
+{{- if getenv "LCZERO_MAX_CONCURRENT_SEARCHERS" -}}
+{{"\n"}}max-concurrent-searchers={{ .Env.LCZERO_MAX_CONCURRENT_SEARCHERS }}{{"\n"}}
+{{- end -}}
