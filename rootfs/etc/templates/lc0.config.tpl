@@ -154,3 +154,8 @@ syzygy-paths={{ getenv "LCZERO_SYZYGY_PATHS" "/lczero/resources/syzygy-tables" }
 {{- if getenv "LCZERO_MAX_CONCURRENT_SEARCHERS" -}}
 {{"\n"}}max-concurrent-searchers={{ .Env.LCZERO_MAX_CONCURRENT_SEARCHERS }}{{"\n"}}
 {{- end -}}
+
+{{- if and (eq (getenv "LCZERO_VERSION") "0.28") (getenv "LCZERO_MULTI_GATHER") -}}
+{{"\n"}}# Applies to version 0.28 only
+multi-gather={{ .Env.LCZERO_MULTI_GATHER }}{{"\n"}}
+{{- end -}}
