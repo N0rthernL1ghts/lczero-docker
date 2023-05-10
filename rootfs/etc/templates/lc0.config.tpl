@@ -1,4 +1,5 @@
 # See: https://lczero.org/dev/wiki/lc0-options/
+# See: https://lczero.org/play/configuration/flags/
 ##################################################
 
 # Lc0 options
