@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+main() {
+    IS_READY_RESPONSE=$(nc -q 3 127.0.0.1 3333 <<< "isready")
+
+    if echo "${IS_READY_RESPONSE}" | grep -q "^readyok"; then
+        return 0 # success
+    fi
+
+    echo "Error: ${IS_READY_RESPONSE}"
+    return 1
+}
+
+main "${@}"
+exit $?
