@@ -133,7 +133,7 @@ verbose-move-stats={{ getenv "LCZERO_VERBOSE_MOVE_STATS" "true" }}{{"\n"}}
 # See: https://lczero.org/dev/wiki/lc0-options/#engine-options
 
 # This option is enabled by default in this image
-logfile=/lczero/logs/lczero.log
+logfile=/lczero/logs/lczero.log{{"\n"}}
 
 {{- if getenv "LCZERO_MOVE_OVERHEAD" -}}
 {{"\n"}}move-overhead={{ .Env.LCZERO_MOVE_OVERHEAD }}{{"\n"}}
