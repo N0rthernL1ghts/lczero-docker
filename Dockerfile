@@ -50,10 +50,10 @@ FROM --platform=${TARGETPLATFORM} ghcr.io/n0rthernl1ghts/xinetd:debian AS lczero
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
-    && apt-get install ca-certificates curl netcat libprotobuf-dev libopenblas-dev --yes --no-install-recommends \
+    && apt-get install ca-certificates curl netcat --yes --no-install-recommends \
     && adduser --shell /bin/false --disabled-password --gecos "LCZero User" --home "/lczero" "lczero" \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ \
+    && rm -rf /var/lib/apt/lists/ /var/cache/* /var/lib/dpkg/status /var/lib/dpkg/status-old /var/log/* \
     && echo "lczero          3333/tcp                        # LCZero" >> "/etc/services"
 
 COPY --from=rootfs ["/", "/"]
