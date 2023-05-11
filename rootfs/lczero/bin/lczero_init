@@ -7,10 +7,7 @@ SCRIPT_PATH="$(
 cd "${SCRIPT_PATH}" || exit 1
 
 main() {
-    echo "> Starting lc0 ${LCZERO_VERSION}"
-    echo "  Network: ${LCZERO_NETWORK_SHA}"
-
-    ./lc0 --config=/lczero/resources/lc0.config
+    /lczero/bin/lc0 --config=/lczero/resources/lc0.config
     return $?
 }
 

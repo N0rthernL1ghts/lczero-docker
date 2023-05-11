@@ -1,5 +1,5 @@
 # LCZero Build
-FROM --platform=${TARGETPLATFORM} ghcr.io/n0rthernl1ghts/xinetd:debian AS lczero-build
+FROM --platform=${TARGETPLATFORM} debian:11-slim AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION=0.28
@@ -41,11 +41,12 @@ FROM scratch AS rootfs
 COPY ["./rootfs", "/"]
 COPY --from=lczero-build ["/tmp/lczero/build/release/lc0", "/lczero/bin/"]
 COPY --from=hairyhenderson/gomplate:v3.11.5-alpine ["/bin/gomplate", "/usr/local/bin/"]
+COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 
 
 
 # LCZero Service
-FROM --platform=${TARGETPLATFORM} ghcr.io/n0rthernl1ghts/xinetd:debian AS lczero-service
+FROM --platform=${TARGETPLATFORM} debian:11-slim AS lczero-service
 
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \

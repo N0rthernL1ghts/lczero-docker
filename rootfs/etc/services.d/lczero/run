@@ -1,0 +1,3 @@
+#!/command/execlineb -P
+
+s6-tcpserver -u 1000 -g 1000 -v 0.0.0.0 3333 /lczero/bin/lczero_init
