@@ -54,8 +54,7 @@ RUN set -eux \
     && apt-get install ca-certificates curl netcat libopenblas-dev --yes --no-install-recommends \
     && adduser --shell /bin/false --disabled-password --gecos "LCZero User" --home "/lczero" "lczero" \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/ /var/cache/* /var/lib/dpkg/status /var/lib/dpkg/status-old /var/log/* \
-    && echo "lczero          3333/tcp                        # LCZero" >> "/etc/services"
+    && rm -rf /var/lib/apt/lists/ /var/cache/* /var/log/*
 
 COPY --from=rootfs ["/", "/"]
 
@@ -66,7 +65,15 @@ LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.version="${LCZERO_VERSION}"
 
+# s6-overlay configuration
+ENV S6_KEEP_ENV=1
+ENV S6_KILL_GRACETIME=6000
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1
+
+# LCZero
 ENV LCZERO_VERSION="${LCZERO_VERSION}"
 ENV LCZERO_NETWORK_SHA="d7c810f15aad363d58e8efc8d54e7c743191177db27017a441d695acd472c3c5"
 
 EXPOSE 3333/TCP
+
+ENTRYPOINT ["/init"]
