@@ -1,5 +1,5 @@
 --- meson.build	2023-05-11 11:54:23.530970641 +0200
-+++ meson-mod.build	2023-05-11 08:14:36.573691468 +0200
++++ meson-mod.build	2023-05-11 12:40:00.214812163 +0200
 @@ -36,11 +36,6 @@
    # Thread safety annotation
    add_project_arguments('-Wthread-safety', language : 'cpp')
@@ -42,7 +42,7 @@
 -  build_identifier = 'git.' + short_rev
 -  message('Using build identifier "' + build_identifier + '".')
 -endif
-+build_identifier = 'docker.n0rthernl1ghts.lc0
++build_identifier = 'docker'
 +message('Using build identifier "' + build_identifier + '".')
 +
  
