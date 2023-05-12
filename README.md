@@ -13,7 +13,7 @@ GitHub: [LeelaChessZero/lc0](https://github.com/LeelaChessZero/lc0)
 - `ghcr.io/n0rthernl1ghts/lc0:0.28`
 
 ### Experimental Alpine-based Images
-Without LTO-compiled binary = Unsupported at the moment.
+Currently larger than Debian based image due to certain differences in runtime dependencies. Working on resolution.
 
 - `ghcr.io/n0rthernl1ghts/lc0:latest-alpine`
 - `ghcr.io/n0rthernl1ghts/lc0:0.29-alpine`
