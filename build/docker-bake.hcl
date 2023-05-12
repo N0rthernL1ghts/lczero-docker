@@ -100,7 +100,7 @@ target "0_28_0_alpine" {
   cache-to   = get-cache-to("0.28.0-alpine")
   tags       = get-tags("0.28.0-alpine", ["0.28-alpine"])
   args       = get-args("0.28")
-  file       = "Dockerfile.alpine"
+  dockerfile = "Dockerfile.alpine"
 }
 
 target "0_29_0_alpine" {
@@ -109,5 +109,5 @@ target "0_29_0_alpine" {
   cache-to   = get-cache-to("0.29.0-alpine")
   tags       = get-tags("0.29.0-alpine", ["0.29-alpine", "latest-alpine"])
   args       = get-args("0.29")
-  file       = "Dockerfile.alpine"
+  dockerfile = "Dockerfile.alpine"
 }
