@@ -1,7 +1,9 @@
 group "default" {
   targets = [
     "0_28_0",
-    "0_29_0"
+    "0_29_0",
+    "0_28_0_alpine",
+    "0_29_0_alpine"
   ]
 }
 
@@ -90,4 +92,22 @@ target "0_29_0" {
   cache-to   = get-cache-to("0.29.0")
   tags       = get-tags("0.29.0", ["0.29", "latest"])
   args       = get-args("0.29")
+}
+
+target "0_28_0_alpine" {
+  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
+  cache-from = get-cache-from("0.28.0-alpine")
+  cache-to   = get-cache-to("0.28.0-alpine")
+  tags       = get-tags("0.28.0-alpine", ["0.28-alpine"])
+  args       = get-args("0.28")
+  file       = "Dockerfile.alpine"
+}
+
+target "0_29_0_alpine" {
+  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
+  cache-from = get-cache-from("0.29.0-alpine")
+  cache-to   = get-cache-to("0.29.0-alpine")
+  tags       = get-tags("0.29.0-alpine", ["0.29-alpine", "latest-alpine"])
+  args       = get-args("0.29")
+  file       = "Dockerfile.alpine"
 }
