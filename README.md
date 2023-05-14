@@ -1,5 +1,5 @@
 # lczero-docker
-xinetd served LCZero UCI engine
+Network LCZero UCI engine/server
 
 ### LCZero
 https://lczero.org/ <br/>
