@@ -2,8 +2,8 @@ group "default" {
   targets = [
     "0_28_0",
     "0_29_0",
-    "0_28_0_alpine",
-    "0_29_0_alpine"
+    "0_28_0_debian",
+    "0_29_0_debian"
   ]
 }
 
@@ -94,20 +94,20 @@ target "0_29_0" {
   args       = get-args("0.29")
 }
 
-target "0_28_0_alpine" {
+target "0_28_0_debian" {
   inherits   = ["build-dockerfile", "build-platforms", "build-common"]
-  cache-from = get-cache-from("0.28.0-alpine")
-  cache-to   = get-cache-to("0.28.0-alpine")
-  tags       = get-tags("0.28.0-alpine", ["0.28-alpine"])
+  cache-from = get-cache-from("0.28.0-debian")
+  cache-to   = get-cache-to("0.28.0-debian")
+  tags       = get-tags("0.28.0-debian", ["0.28-debian"])
   args       = get-args("0.28")
-  dockerfile = "Dockerfile.alpine"
+  dockerfile = "Dockerfile.debian"
 }
 
-target "0_29_0_alpine" {
+target "0_29_0_debian" {
   inherits   = ["build-dockerfile", "build-platforms", "build-common"]
-  cache-from = get-cache-from("0.29.0-alpine")
-  cache-to   = get-cache-to("0.29.0-alpine")
-  tags       = get-tags("0.29.0-alpine", ["0.29-alpine", "latest-alpine"])
+  cache-from = get-cache-from("0.29.0-debian")
+  cache-to   = get-cache-to("0.29.0-debian")
+  tags       = get-tags("0.29.0-debian", ["0.29-debian", "latest-debian"])
   args       = get-args("0.29")
-  dockerfile = "Dockerfile.alpine"
+  dockerfile = "Dockerfile.debian"
 }
