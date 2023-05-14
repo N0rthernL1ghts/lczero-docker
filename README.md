@@ -6,7 +6,7 @@ https://lczero.org/ <br/>
 GitHub: [LeelaChessZero/lc0](https://github.com/LeelaChessZero/lc0)
 
 
-### Images
+## Images
 
 - `ghcr.io/n0rthernl1ghts/lc0:latest` - Latest stable release
 - `ghcr.io/n0rthernl1ghts/lc0:0.29`
@@ -18,5 +18,8 @@ Currently larger than Debian based image due to certain differences in runtime d
 - `ghcr.io/n0rthernl1ghts/lc0:latest-alpine`
 - `ghcr.io/n0rthernl1ghts/lc0:0.29-alpine`
 - `ghcr.io/n0rthernl1ghts/lc0:0.28-alpine`
+
+
+Please note that all our images support only 64-bit platforms.
 
 # UNSTABLE - WORK IN PROGRESS
