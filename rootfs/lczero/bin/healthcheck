@@ -1,13 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 main() {
-    IS_READY_RESPONSE=$(nc -q 3 127.0.0.1 3333 <<< "isready")
+    IS_READY_RESPONSE="$(echo "isready" | nc -q 3 127.0.0.1 3333)"
 
     if echo "${IS_READY_RESPONSE}" | grep -q "^readyok"; then
         return 0 # success
     fi
 
-    echo "Error: ${IS_READY_RESPONSE}"
+    echo "Engine Error: ${IS_READY_RESPONSE}"
     return 1
 }
 
