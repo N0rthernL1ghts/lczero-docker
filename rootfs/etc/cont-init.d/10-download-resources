@@ -16,8 +16,8 @@ main() {
 
     NETWORK_SHA="${LCZERO_NETWORK_SHA:-}"
 
-    if [ -n "${LCZERO_NETWORK_FILENAME}" ] && [ -f "${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}" ]; then
-        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file ${LCZERO_NETWORKS_PATH}"
+    if [ -n "${LCZERO_NETWORK_FILENAME}" ]; then
+        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file in ${LCZERO_NETWORKS_PATH}"
         NETWORK_PATH="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}"
 
         if [ ! -f "${NETWORK_PATH}" ]; then
