@@ -41,7 +41,7 @@ LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
       org.opencontainers.image.source="https://github.com/N0rthernL1ghts/lczero-docker" \
       org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Alpine Build ${TARGETPLATFORM}" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.version="${LCZERO_VERSION}-alpine"
+      org.opencontainers.image.version="${LCZERO_VERSION}"
 
 # s6-overlay configuration
 ENV S6_KEEP_ENV=1
