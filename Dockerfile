@@ -4,7 +4,7 @@ FROM --platform=${TARGETPLATFORM} alpine:3.18 AS lczero-build
 ARG LCZERO_VERSION
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 
-workdir /tmp
+WORKDIR /tmp
 
 ADD ["https://bootstrap.pypa.io/get-pip.py", "/tmp/get-pip.py"]
 COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
@@ -52,6 +52,8 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1
 ARG LCZERO_VERSION
 ENV LCZERO_VERSION="${LCZERO_VERSION}"
 ENV LCZERO_NETWORK_SHA="d7c810f15aad363d58e8efc8d54e7c743191177db27017a441d695acd472c3c5"
+
+WORKDIR /lczero
 
 EXPOSE 3333/TCP
 
