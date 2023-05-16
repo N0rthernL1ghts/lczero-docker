@@ -9,6 +9,12 @@ main() {
         echo "> Custom config template specified"
     fi
 
+    if [ -n "${LCZERO_NETWORK_FILENAME}" ] && [ -f "${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}" ]; then
+        export LCZERO_WEIGHTS_FILE="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}"
+    else
+        export LCZERO_WEIGHTS_FILE="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_SHA}"
+    fi
+
     echo "> Rendering lc0 config"
     /usr/local/bin/gomplate -V \
         -o /lczero/resources/lc0.config \

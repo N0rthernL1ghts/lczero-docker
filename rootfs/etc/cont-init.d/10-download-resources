@@ -16,26 +16,25 @@ main() {
 
     NETWORK_SHA="${LCZERO_NETWORK_SHA:-}"
 
-    if [ -z "${NETWORK_SHA}" ] || [ "${NETWORK_SHA}" = "custom" ]; then
-        echo "> No network specified, so none will be downloaded"
-        echo "  Looking for network in /lczero-custom/network"
+    if [ -n "${LCZERO_NETWORK_FILENAME}" ] && [ -f "${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}" ]; then
+        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file ${LCZERO_NETWORKS_PATH}"
+        NETWORK_PATH="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}"
 
-        if [ ! -f "/lczero-custom/network" ]; then
-            echo "> No network found"
-            echo "  Please mount a network to /lczero-custom/network"
-            return 0
+        if [ ! -f "${NETWORK_PATH}" ]; then
+            echo "> Error: ${NETWORK_PATH} was not found"
+            echo "  Please add the weights file to ${LCZERO_NETWORKS_PATH} mount"
+            return 1
         fi
 
-        echo "> Found custom network. Creating symlink"
-        ln -sf "/lczero-custom/network" /lczero/resources/network
-        return $?
+        echo "> Found custom network file ${NETWORK_PATH}"
+        return 0
 
     fi
 
     echo "> Downloading resources"
 
     # Download the network
-    if [ ! -f "/lczero/resources/networks/${NETWORK_SHA}" ]; then
+    if [ ! -f "${LCZERO_NETWORKS_PATH}/${NETWORK_SHA}" ]; then
         TEMP_FILE="$(mktemp)"
         echo "> Downloading network ${NETWORK_SHA}"
         if ! downloadNetwork "${NETWORK_SHA}" "${TEMP_FILE}"; then
@@ -44,14 +43,12 @@ main() {
         fi
 
         echo "> Decompressing network"
-        zcat "${TEMP_FILE}" > "/lczero/resources/networks/${NETWORK_SHA}"
+        zcat "${TEMP_FILE}" > "${LCZERO_NETWORKS_PATH}/${NETWORK_SHA}"
 
         rm -f "${TEMP_FILE:?}"
     fi
 
-    echo "> Creating network symlink"
-    ln -sf "/lczero/resources/networks/${NETWORK_SHA}" /lczero/resources/network
-    return $?
+    return 0
 }
 
 main "${@}"

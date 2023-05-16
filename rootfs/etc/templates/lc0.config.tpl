@@ -5,7 +5,7 @@
 # Lc0 options
 # See: https://lczero.org/dev/wiki/lc0-options/#lc0-options
 
-weights={{ getenv "LCZERO_WEIGHTS" "/lczero/resources/network" }}{{"\n"}}
+weights={{ .Env.LCZERO_WEIGHTS_FILE }}{{"\n"}}
 
 # This option is enabled by default in this image
 verbose-move-stats={{ getenv "LCZERO_VERBOSE_MOVE_STATS" "true" }}{{"\n"}}
