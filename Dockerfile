@@ -23,7 +23,7 @@ RUN set -eux \
 FROM scratch AS rootfs
 
 COPY ["./rootfs", "/"]
-COPY --from=lczero-build ["/tmp/lczero/build/release/lc0", "/lczero/bin/"]
+COPY --from=lczero-build ["/tmp/lczero/build/release/lc0", "/lczero/"]
 COPY --from=hairyhenderson/gomplate:v3.11.5-alpine ["/bin/gomplate", "/usr/local/bin/"]
 COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 
@@ -52,7 +52,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1
 ARG LCZERO_VERSION
 ENV LCZERO_VERSION="${LCZERO_VERSION}"
 ENV LCZERO_NETWORK_SHA="d7c810f15aad363d58e8efc8d54e7c743191177db27017a441d695acd472c3c5"
-ENV LCZERO_NETWORKS_PATH="/lczero/resources/networks"
+ENV LCZERO_NETWORKS_PATH="/lczero/networks"
 
 WORKDIR /lczero
 

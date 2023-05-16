@@ -17,7 +17,7 @@ main() {
 
     echo "> Rendering lc0 config"
     /usr/local/bin/gomplate -V \
-        -o /lczero/resources/lc0.config \
+        -o /lczero/lc0.config \
         -f "${CONFIG_TEMPLATE}"
     return $?
 }

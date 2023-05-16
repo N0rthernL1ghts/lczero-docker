@@ -12,14 +12,14 @@ services:
       LCZERO_VERBOSE_MOVE_STATS: "true"
       LCZERO_NETWORK_SHA: "d3afb47455f4318c397bbe257f4b149de497df6cf53dc142cf863bb4981cae05"
     volumes:
-      - "./data/networks:/lczero/resources/networks"
+      - "./data/networks:/lczero/networks"
     networks:
       default:
     deploy:
       restart_policy:
         condition: on-failure
     healthcheck:
-      test: "/lczero/bin/healthcheck || exit 1"
+      test: "/lczero/healthcheck || exit 1"
       interval: 30s
       retries: 3
       start_period: 20s

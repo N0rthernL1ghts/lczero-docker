@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+cd "/lczero" || exit 1
+
+main() {
+    ./lc0 --config=/lczero/lc0.config
+    return $?
+}
+
+main "${@}"
+exit $?
