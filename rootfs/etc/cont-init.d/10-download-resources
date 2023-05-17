@@ -6,7 +6,7 @@ downloadNetwork() {
 
     curl --location \
          --request GET \
-         --url "https://training.lczero.org/get_network?sha=${NETWORK_SHA}"\
+         --url "${LCZERO_NETWORK_GET_URI:?}${NETWORK_SHA}"\
          --output "${DL_TARGET}"
     return $?
 }
