@@ -3,12 +3,12 @@
 
 
 <!-- PROJECT SHIELDS -->
+[![Build][github-actions-build]][github-actions-build-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -198,4 +198,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [issues-url]: https://github.com/N0rthernL1ghts/lczero-docker/issues
 [license-shield]: https://img.shields.io/github/license/N0rthernL1ghts/lczero-docker.svg?style=for-the-badge
 [license-url]: https://github.com/N0rthernL1ghts/lczero-docker/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+[github-actions-build]: https://img.shields.io/github/actions/workflow/status/N0rthernL1ghts/lczero-docker/image.yml?style=for-the-badge
+[github-actions-build-url]: https://github.com/N0rthernL1ghts/lczero-docker/actions/workflows/image.yml
