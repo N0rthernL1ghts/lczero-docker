@@ -180,6 +180,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgments
 
 * [Leela Chess Zero project](https://lczero.org/)
+* README based on [othneildrew's Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
