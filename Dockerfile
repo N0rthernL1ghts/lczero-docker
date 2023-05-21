@@ -10,7 +10,10 @@ ADD ["https://bootstrap.pypa.io/get-pip.py", "/tmp/get-pip.py"]
 COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
 
 RUN set -eux \
-    && apk add git alpine-sdk bash ninja openblas-dev eigen-dev protoc protobuf-dev cmake gcompat gtest-dev python3 \
+    && apk add git alpine-sdk bash ninja openblas-dev protoc protobuf-dev cmake gcompat gtest-dev python3 \
+    && if [ "$(uname -m)" = "x86_64" ]; then \
+           apk add eigen-dev; \
+       fi \
     && git clone -b "release/${LCZERO_VERSION}" --jobs="$(nproc)" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
     && python3 /tmp/get-pip.py \
     && pip install meson \
@@ -32,7 +35,10 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 FROM --platform=${TARGETPLATFORM} alpine:3.18
 
 RUN set -eux \
-    && apk add --update --no-cache libstdc++ ca-certificates curl netcat-openbsd openblas eigen \
+    && apk add --update --no-cache libstdc++ ca-certificates curl netcat-openbsd openblas \
+    && if [ "$(uname -m)" = "x86_64" ]; then \
+           apk add eigen; \
+       fi \
     && adduser --shell /bin/false --disabled-password --gecos "LCZero User" --home "/lczero" "lczero"
 
 COPY --from=rootfs ["/", "/"]
