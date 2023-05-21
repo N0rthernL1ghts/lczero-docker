@@ -11,9 +11,6 @@ COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
 
 RUN set -eux \
     && apk add git alpine-sdk bash ninja openblas-dev eigen-dev protoc protobuf-dev cmake gcompat gtest-dev python3 \
-    && if [ "$(uname -m)" = "x86_64" ]; then \
-           apk add ispc; \
-       fi \
     && git clone -b "release/${LCZERO_VERSION}" --jobs="$(nproc)" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
     && python3 /tmp/get-pip.py \
     && pip install meson \
