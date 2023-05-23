@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 
 main() {
-    IS_READY_RESPONSE="$(printf "%s\n" "isready" "quit" | nc -q 3 127.0.0.1 3333)"
+    touch /tmp/lc0_healthcheck.log
+    chown 1000:1000 /tmp/lc0_healthcheck.log
+
+    IS_READY_RESPONSE="$(printf "%s\n" "isready" "quit" | /lczero/lc0 --logfile=/tmp/lc0_healthcheck.log )"
 
     if echo "${IS_READY_RESPONSE}" | grep -q "^readyok"; then
         return 0 # success
