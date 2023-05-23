@@ -4,6 +4,7 @@ main() {
     touch /tmp/lc0_healthcheck.log
     chown 1000:1000 /tmp/lc0_healthcheck.log
 
+    # This doesn't cover backend errors, but it's better than nothing.
     IS_READY_RESPONSE="$(printf "%s\n" "isready" "quit" | /lczero/lc0 --logfile=/tmp/lc0_healthcheck.log )"
 
     if echo "${IS_READY_RESPONSE}" | grep -q "^readyok"; then
