@@ -1,5 +1,5 @@
 # LCZero Build
-FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04 AS lczero-build
+FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04 AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION=0.28
@@ -51,7 +51,7 @@ COPY --from=s6-rootfs-fixed ["/tmp/s6-rootfs/", "/"]
 
 
 # LCZero Service
-FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04 AS lczero-service
+FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04 AS lczero-service
 
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
