@@ -3,7 +3,9 @@ group "default" {
     "0_28_0",
     "0_29_0",
     "0_28_0_debian",
-    "0_29_0_debian"
+    "0_29_0_debian",
+    "0_28_0_cudnn",
+    "0_29_0_cudnn"
   ]
 }
 
@@ -110,4 +112,22 @@ target "0_29_0_debian" {
   tags       = get-tags("0.29.0-debian", ["0.29-debian", "latest-debian"])
   args       = get-args("0.29")
   dockerfile = "Dockerfile.debian"
+}
+
+target "0_28_0_cudnn" {
+  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
+  cache-from = get-cache-from("0.28.0-cudnn")
+  cache-to   = get-cache-to("0.28.0-cudnn")
+  tags       = get-tags("0.28.0-cudnn", ["0.28-cudnn"])
+  args       = get-args("0.28")
+  dockerfile = "variations/cudnn/Dockerfile"
+}
+
+target "0_29_0_cudnn" {
+  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
+  cache-from = get-cache-from("0.29.0-cudnn")
+  cache-to   = get-cache-to("0.29.0-cudnn")
+  tags       = get-tags("0.29.0-cudnn", ["0.29-cudnn", "latest-cudnn"])
+  args       = get-args("0.29")
+  dockerfile = "variations/cudnn/Dockerfile"
 }

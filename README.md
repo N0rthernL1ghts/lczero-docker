@@ -144,7 +144,7 @@ LCZERO_CUSTOM_CONFIG_TEMPLATE
 - No training support (yet)
 - Only 64-bit CPU support (this is intentional as 32-bit CPUs would be too slow anyway)
 - Bundled binaries are compiled without CPU optimizations (this is intentional - as it builds it for current CPU)
-
+- As of 2023-07-03 CUDNN support has been implemented. Check out tags with `-cudnn` (eg. `0.29-cudnn`) suffix. Based on official CUDA Ubuntu 22.04 images.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
