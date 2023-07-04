@@ -102,7 +102,7 @@ target "0_28_0_debian" {
   cache-to   = get-cache-to("0.28.0-debian")
   tags       = get-tags("0.28.0-debian", ["0.28-debian"])
   args       = get-args("0.28")
-  dockerfile = "Dockerfile.debian"
+  dockerfile = "variations/debian/Dockerfile"
 }
 
 target "0_29_0_debian" {
@@ -111,7 +111,7 @@ target "0_29_0_debian" {
   cache-to   = get-cache-to("0.29.0-debian")
   tags       = get-tags("0.29.0-debian", ["0.29-debian", "latest-debian"])
   args       = get-args("0.29")
-  dockerfile = "Dockerfile.debian"
+  dockerfile = "variations/debian/Dockerfile"
 }
 
 target "0_28_0_cudnn" {

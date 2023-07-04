@@ -16,3 +16,17 @@ updates:
       interval: "weekly"
     assignees:
       - "xZero707"
+
+  - package-ecosystem: "docker"
+    directory: "variations/debian/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "xZero707"
+
+  - package-ecosystem: "docker"
+    directory: "variations/cudnn/"
+    schedule:
+      interval: "monthly"
+    assignees:
+      - "xZero707"
