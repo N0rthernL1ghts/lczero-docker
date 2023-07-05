@@ -1,5 +1,5 @@
 # LCZero Build
-FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.0-cudnn8-runtime-ubuntu22.04 AS lczero-build
+FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04 AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION=0.28
@@ -32,12 +32,15 @@ RUN set -eux \
     && ./build.sh \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 
+
+
+# Adapt s6 rootfs for Ubuntu
 FROM alpine AS s6-rootfs-fixed
 
 COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/tmp/s6-rootfs/"]
 
 RUN apk add rsync \
-    && rsync -ah /tmp/s6-rootfs/bin/ /tmp/s6-rootfs/usr/bin/ \
+    && rsync -ah --remove-source-files /tmp/s6-rootfs/bin/ /tmp/s6-rootfs/usr/bin/ \
     && rm /tmp/s6-rootfs/bin -rf
 
 # Root filesystem builder
