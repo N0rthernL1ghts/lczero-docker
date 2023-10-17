@@ -1,5 +1,5 @@
 # LCZero Build
-FROM --platform=${TARGETPLATFORM} debian:11-slim AS lczero-build
+FROM --platform=${TARGETPLATFORM} debian:12-slim AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION=0.28
@@ -46,7 +46,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 
 
 # LCZero Service
-FROM --platform=${TARGETPLATFORM} debian:11-slim AS lczero-service
+FROM --platform=${TARGETPLATFORM} debian:12-slim AS lczero-service
 
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
