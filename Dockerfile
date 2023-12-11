@@ -1,5 +1,5 @@
 ARG LCZERO_VERSION=0.29
-FROM --platform=${TARGETPLATFORM} alpine:3.18 AS lczero-build
+FROM --platform=${TARGETPLATFORM} alpine:3.19 AS lczero-build
 
 ARG LCZERO_VERSION
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
@@ -32,7 +32,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 
 
 
-FROM --platform=${TARGETPLATFORM} alpine:3.18
+FROM --platform=${TARGETPLATFORM} alpine:3.19
 
 RUN set -eux \
     && apk add --update --no-cache libstdc++ ca-certificates curl netcat-openbsd openblas \
