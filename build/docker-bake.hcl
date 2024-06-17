@@ -2,8 +2,10 @@ group "default" {
   targets = [
     "0_28_0",
     "0_29_0",
+    "0_30_0",
     "0_28_0_cudnn",
-    "0_29_0_cudnn"
+    "0_29_0_cudnn",
+    "0_30_0_cudnn"
   ]
 }
 
@@ -95,8 +97,16 @@ target "0_29_0" {
   inherits   = ["build-dockerfile", "build-platforms", "build-common"]
   cache-from = get-cache-from("0.29.0")
   cache-to   = get-cache-to("0.29.0")
-  tags       = get-tags("0.29.0", ["0.29", "latest"])
+  tags       = get-tags("0.29.0", ["0.29"])
   args       = get-args("0.29", "0.29")
+}
+
+target "0_30_0" {
+  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
+  cache-from = get-cache-from("0.30.0")
+  cache-to   = get-cache-to("0.30.0")
+  tags       = get-tags("0.30.0", ["0.30", "latest"])
+  args       = get-args("0.30", "0.29")
 }
 
 target "0_28_0_cudnn" {
@@ -112,7 +122,16 @@ target "0_29_0_cudnn" {
   inherits   = ["build-dockerfile", "build-platforms-cudnn", "build-common"]
   cache-from = get-cache-from("0.29.0-cudnn")
   cache-to   = get-cache-to("0.29.0-cudnn")
-  tags       = get-tags("0.29.0-cudnn", ["0.29-cudnn", "latest-cudnn"])
+  tags       = get-tags("0.29.0-cudnn", ["0.29-cudnn"])
   args       = get-args("0.29", "0.29")
+  dockerfile = "variations/cudnn/Dockerfile"
+}
+
+target "0_30_0_cudnn" {
+  inherits   = ["build-dockerfile", "build-platforms-cudnn", "build-common"]
+  cache-from = get-cache-from("0.30.0-cudnn")
+  cache-to   = get-cache-to("0.30.0-cudnn")
+  tags       = get-tags("0.30.0-cudnn", ["0.30-cudnn", "latest-cudnn"])
+  args       = get-args("0.30", "0.29")
   dockerfile = "variations/cudnn/Dockerfile"
 }
