@@ -1,13 +1,16 @@
+ARG PATCH_VERSION=0.29
 ARG LCZERO_VERSION=0.29
+
 FROM --platform=${TARGETPLATFORM} alpine:3.18 AS lczero-build
 
+ARG PATCH_VERSION
 ARG LCZERO_VERSION
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 
 WORKDIR /tmp
 
 ADD ["https://bootstrap.pypa.io/get-pip.py", "/tmp/get-pip.py"]
-COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
+COPY ["./patches/${PATCH_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
 
 RUN set -eux \
     && apk add git alpine-sdk bash ninja openblas-dev protoc protobuf-dev cmake gcompat gtest-dev python3 \

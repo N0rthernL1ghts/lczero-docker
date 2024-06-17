@@ -1,12 +1,16 @@
+ARG PATCH_VERSION=0.29
+ARG LCZERO_VERSION=0.28
+
 # LCZero Build
 FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04 AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
-ARG LCZERO_VERSION=0.28
+ARG LCZERO_VERSION
+ARG PATCH_VERSION
 
 WORKDIR /tmp
 
-COPY ["./patches/${LCZERO_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
+COPY ["./patches/${PATCH_VERSION}/meson.build.patch", "/tmp/meson.build.patch"]
 
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \

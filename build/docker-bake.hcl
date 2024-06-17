@@ -37,9 +37,10 @@ variable "REGISTRY_CACHE" {
 
 # Get the arguments for the build
 function "get-args" {
-  params = [version]
+  params = [version, patch_version]
   result = {
     LCZERO_VERSION = version
+    PATCH_VERSION  = patch_version
   }
 }
 
@@ -87,7 +88,7 @@ target "0_28_0" {
   cache-from = get-cache-from("0.28.0")
   cache-to   = get-cache-to("0.28.0")
   tags       = get-tags("0.28.0", ["0.28"])
-  args       = get-args("0.28")
+  args       = get-args("0.28", "0.29")
 }
 
 target "0_29_0" {
@@ -95,7 +96,7 @@ target "0_29_0" {
   cache-from = get-cache-from("0.29.0")
   cache-to   = get-cache-to("0.29.0")
   tags       = get-tags("0.29.0", ["0.29", "latest"])
-  args       = get-args("0.29")
+  args       = get-args("0.29", "0.29")
 }
 
 target "0_28_0_cudnn" {
@@ -103,7 +104,7 @@ target "0_28_0_cudnn" {
   cache-from = get-cache-from("0.28.0-cudnn")
   cache-to   = get-cache-to("0.28.0-cudnn")
   tags       = get-tags("0.28.0-cudnn", ["0.28-cudnn"])
-  args       = get-args("0.28")
+  args       = get-args("0.28", "0.29")
   dockerfile = "variations/cudnn/Dockerfile"
 }
 
@@ -112,6 +113,6 @@ target "0_29_0_cudnn" {
   cache-from = get-cache-from("0.29.0-cudnn")
   cache-to   = get-cache-to("0.29.0-cudnn")
   tags       = get-tags("0.29.0-cudnn", ["0.29-cudnn", "latest-cudnn"])
-  args       = get-args("0.29")
+  args       = get-args("0.29", "0.29")
   dockerfile = "variations/cudnn/Dockerfile"
 }
