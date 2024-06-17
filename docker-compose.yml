@@ -15,7 +15,7 @@ services:
       default:
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
     healthcheck:
       test: "/lczero/healthcheck || exit 1"
       interval: 30s
