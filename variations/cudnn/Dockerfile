@@ -1,5 +1,5 @@
 ARG PATCH_VERSION=0.29
-ARG LCZERO_VERSION=0.28
+ARG LCZERO_VERSION=0.29
 
 # LCZero Build
 FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04 AS lczero-build
