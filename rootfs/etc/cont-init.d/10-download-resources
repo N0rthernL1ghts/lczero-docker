@@ -1,56 +1,60 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 downloadNetwork() {
-    NETWORK_SHA="${1:?Missing network SHA}"
-    DL_TARGET="${2:?Missing download target}"
+    local networkSha="${1:?Missing network SHA}"
+    local dlTarget="${2:?Missing download target}"
 
     curl --location \
-         --request GET \
-         --url "${LCZERO_NETWORK_GET_URI:?}${NETWORK_SHA}"\
-         --output "${DL_TARGET}"
+        --request GET \
+        --url "${LCZERO_NETWORK_GET_URI:?}${networkSha}" \
+        --output "${dlTarget}"
     return $?
 }
 
 main() {
     mkdir -p /lczero/resources
 
-    NETWORK_SHA="${LCZERO_NETWORK_SHA:-}"
+    local networkSha="${LCZERO_NETWORK_SHA:-}"
+    local networkFilename="${LCZERO_NETWORK_FILENAME:-}"
+    local networksPath="${LCZERO_NETWORKS_PATH:?}"
+    local networkPath
 
-    if [ -n "${LCZERO_NETWORK_FILENAME}" ]; then
-        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file in ${LCZERO_NETWORKS_PATH}"
-        NETWORK_PATH="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}"
+    if [ -n "${networkFilename}" ]; then
+        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file in ${networksPath}"
+        networkPath="${networksPath}/${networkFilename}"
 
-        if [ ! -f "${NETWORK_PATH}" ]; then
-            echo "> Error: ${NETWORK_PATH} was not found"
-            echo "  Please add the weights file to ${LCZERO_NETWORKS_PATH} mount"
+        if [ ! -f "${networkPath}" ]; then
+            echo "> Error: ${networkPath} was not found"
+            echo "  Please add the weights file to ${networksPath} mount"
             return 1
         fi
 
-        echo "> Found custom network file ${NETWORK_PATH}"
+        echo "> Found custom network file ${networkPath}"
         return 0
 
     fi
 
     echo "> Downloading resources"
 
+    networkPath="${networksPath}/${networkSha}"
+
     # Download the network
-    if [ ! -f "${LCZERO_NETWORKS_PATH}/${NETWORK_SHA}" ]; then
-        TEMP_FILE="$(mktemp)"
-        echo "> Downloading network ${NETWORK_SHA}"
-        if ! downloadNetwork "${NETWORK_SHA}" "${TEMP_FILE}"; then
-            echo "> Failed to download network ${NETWORK_SHA}"
+    if [ ! -f "${networkPath}" ]; then
+        local tempFile
+        tempFile="$(mktemp)"
+        echo "> Downloading network ${networkSha}"
+        if ! downloadNetwork "${networkSha}" "${tempFile}"; then
+            echo "> Failed to download network ${networkSha}"
             return 1
         fi
 
         echo "> Decompressing network"
-        zcat "${TEMP_FILE}" > "${LCZERO_NETWORKS_PATH}/${NETWORK_SHA}"
+        zcat "${tempFile}" >"${networkPath}"
 
-        rm -f "${TEMP_FILE:?}"
+        rm -f "${tempFile:?}"
     fi
 
     return 0
 }
 
 main "${@}"
-exit $?
-

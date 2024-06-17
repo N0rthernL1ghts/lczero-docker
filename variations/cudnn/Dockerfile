@@ -16,6 +16,7 @@ RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install --yes  --no-install-recommends \
+            bash \
             build-essential \
             git \
             libopenblas-dev \

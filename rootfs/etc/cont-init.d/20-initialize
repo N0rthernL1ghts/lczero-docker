@@ -3,9 +3,6 @@
 main() {
     touch /lczero/logs/lczero.log
     chown lczero:lczero /lczero/logs/lczero.log
-
-    return $?
 }
 
 main "${@}"
-exit $?

@@ -1,26 +1,31 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 main() {
     mkdir -p /lczero/resources
 
-    CONFIG_TEMPLATE="${LCZERO_CUSTOM_CONFIG_TEMPLATE:-/etc/templates/lc0.config.tpl}"
+    local configTemplate="${LCZERO_CUSTOM_CONFIG_TEMPLATE:-/etc/templates/lc0.config.tpl}"
 
     if [ -n "${LCZERO_CUSTOM_CONFIG_TEMPLATE}" ]; then
         echo "> Custom config template specified"
     fi
 
-    if [ -n "${LCZERO_NETWORK_FILENAME}" ] && [ -f "${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}" ]; then
-        export LCZERO_WEIGHTS_FILE="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_FILENAME}"
+    local networkFilename="${LCZERO_NETWORK_FILENAME:-}"
+    local networksPath="${LCZERO_NETWORKS_PATH:?}"
+    local networkSha="${LCZERO_NETWORK_SHA:-}"
+
+    if [ -n "${networkFilename}" ] && [ -f "${networksPath}/${networkFilename}" ]; then
+        LCZERO_WEIGHTS_FILE="${networksPath}/${networkFilename}"
     else
-        export LCZERO_WEIGHTS_FILE="${LCZERO_NETWORKS_PATH}/${LCZERO_NETWORK_SHA}"
+        LCZERO_WEIGHTS_FILE="${networksPath}/${networkSha}"
     fi
+
+    export LCZERO_WEIGHTS_FILE
 
     echo "> Rendering lc0 config"
     /usr/local/bin/gomplate -V \
         -o /lczero/lc0.config \
-        -f "${CONFIG_TEMPLATE}"
+        -f "${configTemplate}"
     return $?
 }
 
 main "${@}"
-exit $?

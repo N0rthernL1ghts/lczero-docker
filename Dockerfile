@@ -39,7 +39,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
 FROM --platform=${TARGETPLATFORM} alpine:3.18
 
 RUN set -eux \
-    && apk add --update --no-cache libstdc++ ca-certificates curl netcat-openbsd openblas \
+    && apk add --update --no-cache bash libstdc++ ca-certificates curl netcat-openbsd openblas \
     && if [ "$(uname -m)" = "x86_64" ]; then \
            apk add eigen; \
        fi \
