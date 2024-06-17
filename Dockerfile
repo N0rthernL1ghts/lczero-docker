@@ -32,7 +32,7 @@ FROM scratch AS rootfs
 COPY ["./rootfs", "/"]
 COPY --from=lczero-build ["/tmp/lczero/build/release/lc0", "/lczero/"]
 COPY --from=hairyhenderson/gomplate:v3.11.5-alpine ["/bin/gomplate", "/usr/local/bin/"]
-COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/"]
+COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:3.1.6.2 ["/", "/"]
 
 
 
@@ -57,6 +57,7 @@ LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
 ENV S6_KEEP_ENV=1
 ENV S6_KILL_GRACETIME=6000
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1
+ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 # LCZero
 ARG LCZERO_VERSION

@@ -1,0 +1,12 @@
+#!/command/with-contenv bash
+# shellcheck shell=bash
+
+# svc-lczero main
+main() {
+    # This will prepend service name to all output from here
+    exec > >(while read -r line; do echo "[svc-lczero] ${line}"; done) 2>&1
+
+    # Run process
+    exec /command/s6-tcpserver -u 1000 -g 1000 -v 0.0.0.0 3333 /lczero/lc0_init
+}
+main

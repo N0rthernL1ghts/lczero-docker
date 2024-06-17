@@ -37,24 +37,13 @@ RUN set -eux \
     && ./build.sh \
     && rm lczero/build/release/{*@exe,*.ninja,meson-*,compile_*,*_test} -rf
 
-
-
-# Adapt s6 rootfs for Ubuntu
-FROM alpine AS s6-rootfs-fixed
-
-COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:2.2 ["/", "/tmp/s6-rootfs/"]
-
-RUN apk add rsync \
-    && rsync -ah --remove-source-files /tmp/s6-rootfs/bin/ /tmp/s6-rootfs/usr/bin/ \
-    && rm /tmp/s6-rootfs/bin -rf
-
 # Root filesystem builder
 FROM scratch AS rootfs
 
 COPY ["./rootfs", "/"]
 COPY --from=lczero-build ["/tmp/lczero/build/release/lc0", "/lczero/"]
 COPY --from=hairyhenderson/gomplate:v3.11.5-alpine ["/bin/gomplate", "/usr/local/bin/"]
-COPY --from=s6-rootfs-fixed ["/tmp/s6-rootfs/", "/"]
+COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:3.1.6.2 ["/", "/"]
 
 
 
@@ -82,6 +71,7 @@ LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
 ENV S6_KEEP_ENV=1
 ENV S6_KILL_GRACETIME=6000
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=1
+ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
 
 # LCZero
 ENV LCZERO_VERSION="${LCZERO_VERSION}"

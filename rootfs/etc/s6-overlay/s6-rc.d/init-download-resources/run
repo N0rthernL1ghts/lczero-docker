@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/command/with-contenv bash
+# shellcheck shell=bash
 
 downloadNetwork() {
     local networkSha="${1:?Missing network SHA}"
@@ -11,7 +12,11 @@ downloadNetwork() {
     return $?
 }
 
+# init-download-resources main
 main() {
+    # This will prepend service name to all output from here
+    exec > >(while read -r line; do echo "[init-download-resources] ${line}"; done) 2>&1
+
     mkdir -p /lczero/resources
 
     local networkSha="${LCZERO_NETWORK_SHA:-}"
@@ -20,21 +25,21 @@ main() {
     local networkPath
 
     if [ -n "${networkFilename}" ]; then
-        echo "> LCZERO_NETWORK_FILENAME specified. Looking for network file in ${networksPath}"
+        echo "LCZERO_NETWORK_FILENAME specified. Looking for network file in ${networksPath}"
         networkPath="${networksPath}/${networkFilename}"
 
         if [ ! -f "${networkPath}" ]; then
-            echo "> Error: ${networkPath} was not found"
-            echo "  Please add the weights file to ${networksPath} mount"
+            echo "Error: ${networkPath} was not found"
+            echo "Please add the weights file to ${networksPath} mount"
             return 1
         fi
 
-        echo "> Found custom network file ${networkPath}"
+        echo "Found custom network file ${networkPath}"
         return 0
 
     fi
 
-    echo "> Downloading resources"
+    echo "Downloading resources"
 
     networkPath="${networksPath}/${networkSha}"
 
@@ -42,13 +47,13 @@ main() {
     if [ ! -f "${networkPath}" ]; then
         local tempFile
         tempFile="$(mktemp)"
-        echo "> Downloading network ${networkSha}"
+        echo "Downloading network ${networkSha}"
         if ! downloadNetwork "${networkSha}" "${tempFile}"; then
-            echo "> Failed to download network ${networkSha}"
+            echo "Failed to download network ${networkSha}"
             return 1
         fi
 
-        echo "> Decompressing network"
+        echo "Decompressing network"
         zcat "${tempFile}" >"${networkPath}"
 
         rm -f "${tempFile:?}"

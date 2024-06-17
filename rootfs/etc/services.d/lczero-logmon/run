@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-echo "> LCZero Log Monitor service started"
-exec tail -F /lczero/logs/lczero.log

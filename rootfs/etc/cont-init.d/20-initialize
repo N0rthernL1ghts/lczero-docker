@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-
-main() {
-    touch /lczero/logs/lczero.log
-    chown lczero:lczero /lczero/logs/lczero.log
-}
-
-main "${@}"

@@ -1,0 +1,13 @@
+#!/command/with-contenv bash
+# shellcheck shell=bash
+
+# init-prepare-log main
+main() {
+    # This will prepend service name to all output from here
+    exec > >(while read -r line; do echo "[init-prepare-log] ${line}"; done) 2>&1
+
+    touch /lczero/logs/lczero.log
+    chown lczero:lczero /lczero/logs/lczero.log
+}
+
+main "${@}"
