@@ -15,6 +15,7 @@ RUN set -eux \
            apk add eigen-dev; \
        fi \
     && git clone -b "release/${LCZERO_VERSION}" --jobs="$(nproc)" --depth=1 --recurse-submodules "${LCZERO_REPOSITORY}" lczero \
+    && rm -rf /usr/lib/python*/EXTERNALLY-MANAGED \
     && python3 /tmp/get-pip.py \
     && pip install meson \
     && cd lczero \
