@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   engine:
     image: ghcr.io/n0rthernl1ghts/lc0:latest
