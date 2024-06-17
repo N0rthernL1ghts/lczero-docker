@@ -1,7 +1,7 @@
 ARG PATCH_VERSION=0.29
 ARG LCZERO_VERSION=0.29
 
-FROM --platform=${TARGETPLATFORM} alpine:3.18 AS lczero-build
+FROM --platform=${TARGETPLATFORM} alpine:3.20 AS lczero-build
 
 ARG PATCH_VERSION
 ARG LCZERO_VERSION
@@ -36,7 +36,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:3.1.6.2 ["/", "/"]
 
 
 
-FROM --platform=${TARGETPLATFORM} alpine:3.18
+FROM --platform=${TARGETPLATFORM} alpine:3.20
 
 RUN set -eux \
     && apk add --update --no-cache bash libstdc++ ca-certificates curl netcat-openbsd openblas \
