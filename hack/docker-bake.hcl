@@ -1,10 +1,24 @@
 group "default" {
-  targets = [
-    "0_30_0",
-    "0_31_0",
-    "0_30_0_cudnn",
-    "0_31_0_cudnn"
-  ]
+  targets = ["lc0", "lc0-cudnn"]
+}
+
+variable "REGISTRY_CACHE" {
+  default = "docker.io/nlss/lczero-cache"
+}
+
+variable "LCZERO_VERSIONS" {
+  default = {
+    "0.30.0" = {
+      lc_version = "0.30"
+      patch_version = "0.29"
+      extra_tags = ["0.30"]
+    }
+    "0.31.0" = {
+      lc_version = "0.31"
+      patch_version = "0.31"
+      extra_tags = ["0.31", "latest"]
+    }
+  }
 }
 
 target "build-dockerfile" {
@@ -23,23 +37,11 @@ target "build-common" {
   pull = true
 }
 
-######################
-# Define the variables
-######################
-
-variable "REGISTRY_CACHE" {
-  default = "docker.io/nlss/lczero-cache"
-}
-
-######################
-# Define the functions
-######################
-
 # Get the arguments for the build
 function "get-args" {
-  params = [version, patch_version]
+  params = [lc_version, patch_version]
   result = {
-    LCZERO_VERSION = version
+    LCZERO_VERSION = lc_version
     PATCH_VERSION  = patch_version
   }
 }
@@ -81,40 +83,29 @@ function "get-tags" {
   )
 }
 
-##########################
-# Define the build targets
-##########################
+target "lc0" {
+  inherits = ["build-dockerfile", "build-platforms", "build-common"]
+  matrix = {
+    version = keys(LCZERO_VERSIONS)
+  }
 
-target "0_30_0" {
-  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
-  cache-from = get-cache-from("0.30.0")
-  cache-to   = get-cache-to("0.30.0")
-  tags       = get-tags("0.30.0", ["0.30"])
-  args       = get-args("0.30", "0.29")
+  name = replace(version, ".", "_")
+  args = get-args(LCZERO_VERSIONS[version].lc_version, LCZERO_VERSIONS[version].patch_version)
+  tags = get-tags(version, LCZERO_VERSIONS[version].extra_tags)
+  cache-from = get-cache-from(version)
+  cache-to   = get-cache-to(version)
 }
 
-target "0_31_0" {
-  inherits   = ["build-dockerfile", "build-platforms", "build-common"]
-  cache-from = get-cache-from("0.31.0")
-  cache-to   = get-cache-to("0.31.0")
-  tags       = get-tags("0.31.0", ["0.31", "latest"])
-  args       = get-args("0.31", "0.31")
-}
-
-target "0_30_0_cudnn" {
-  inherits   = ["build-dockerfile", "build-platforms-cudnn", "build-common"]
-  cache-from = get-cache-from("0.30.0-cudnn")
-  cache-to   = get-cache-to("0.30.0-cudnn")
-  tags       = get-tags("0.30.0-cudnn", ["0.30-cudnn"])
-  args       = get-args("0.30", "0.29")
+target "lc0-cudnn" {
+  inherits = ["build-dockerfile", "build-platforms-cudnn", "build-common"]
   dockerfile = "variations/cudnn/Dockerfile"
-}
+  matrix = {
+    version = keys(LCZERO_VERSIONS)
+  }
 
-target "0_31_0_cudnn" {
-  inherits   = ["build-dockerfile", "build-platforms-cudnn", "build-common"]
-  cache-from = get-cache-from("0.31.0-cudnn")
-  cache-to   = get-cache-to("0.31.0-cudnn")
-  tags       = get-tags("0.31.0-cudnn", ["0.31-cudnn", "latest-cudnn"])
-  args       = get-args("0.31", "0.31")
-  dockerfile = "variations/cudnn/Dockerfile"
+  name = "${replace(version, ".", "_")}_cudnn"
+  args = get-args(LCZERO_VERSIONS[version].lc_version, LCZERO_VERSIONS[version].patch_version)
+  tags = get-tags("${version}-cudnn", [for t in LCZERO_VERSIONS[version].extra_tags : "${t}-cudnn"])
+  cache-from = get-cache-from("${version}-cudnn")
+  cache-to   = get-cache-to("${version}-cudnn")
 }
