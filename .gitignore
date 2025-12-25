@@ -1,5 +1,6 @@
 .idea
 data/
+secrets/
 build/
 !rootfs/lczero/networks/.gitkeep
-docker-compose.override.yml
+compose.override.yml
