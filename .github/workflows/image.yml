@@ -36,6 +36,17 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.PAT_TOKEN}}
       -
+        name: Free Disk Space (Ubuntu)
+        uses: BRAINSia/free-disk-space@v2.1.2
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: false
+          swap-storage: true
+      -
         name: Build and push
         uses: docker/bake-action@v6.10.0
         with:
