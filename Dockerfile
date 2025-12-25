@@ -1,7 +1,7 @@
-ARG PATCH_VERSION=0.29
-ARG LCZERO_VERSION=0.29
+ARG PATCH_VERSION=0.30
+ARG LCZERO_VERSION=0.30
 
-FROM --platform=${TARGETPLATFORM} alpine:3.23 AS lczero-build
+FROM alpine:3.23 AS lczero-build
 
 ARG PATCH_VERSION
 ARG LCZERO_VERSION
@@ -36,7 +36,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:3.1.6.2 ["/", "/"]
 
 
 
-FROM --platform=${TARGETPLATFORM} alpine:3.23
+FROM alpine:3.23
 
 RUN set -eux \
     && apk add --update --no-cache bash libstdc++ ca-certificates curl netcat-openbsd openblas \
@@ -49,7 +49,7 @@ COPY --from=rootfs ["/", "/"]
 
 LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
       org.opencontainers.image.source="https://github.com/N0rthernL1ghts/lczero-docker" \
-      org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Alpine Build ${TARGETPLATFORM}" \
+      org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Alpine Build" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.version="${LCZERO_VERSION}"
 

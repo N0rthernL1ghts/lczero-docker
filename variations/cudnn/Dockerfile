@@ -1,8 +1,8 @@
-ARG PATCH_VERSION=0.29
-ARG LCZERO_VERSION=0.29
+ARG PATCH_VERSION=0.30
+ARG LCZERO_VERSION=0.30
 
 # LCZero Build
-FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04 AS lczero-build
+FROM nvidia/cuda:12.2.2-cudnn8-devel-ubuntu22.04 AS lczero-build
 
 ARG LCZERO_REPOSITORY=https://github.com/LeelaChessZero/lc0.git
 ARG LCZERO_VERSION
@@ -48,7 +48,7 @@ COPY --from=ghcr.io/n0rthernl1ghts/s6-rootfs:3.1.6.2 ["/", "/"]
 
 
 # LCZero Service
-FROM --platform=${TARGETPLATFORM} nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04 AS lczero-service
+FROM nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04 AS lczero-service
 
 RUN set -eux \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -63,7 +63,7 @@ COPY --from=rootfs ["/", "/"]
 ARG LCZERO_VERSION
 LABEL maintainer="Aleksandar Puharic <aleksandar@puharic.com>" \
       org.opencontainers.image.source="https://github.com/N0rthernL1ghts/lczero-docker" \
-      org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Ubuntu CUDNN Build ${TARGETPLATFORM}" \
+      org.opencontainers.image.description="LcZero ${LCZERO_VERSION} (lc0) - Ubuntu CUDNN Build" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.version="${LCZERO_VERSION}-ubuntu-cudnn"
 
